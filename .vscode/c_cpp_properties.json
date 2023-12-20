@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ubuntu/final_ws/install/ros2_aruco_interfaces/include/**",
+        "/home/ubuntu/final_ws/install/final_project/include/**",
+        "/home/ubuntu/final_ws/install/mage_msgs/include/**",
+        "/opt/ros/galactic/include/**",
+        "/home/ubuntu/final_ws/src/final_project/include/**",
+        "/home/ubuntu/final_ws/src/group29_final/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
