@@ -208,18 +208,11 @@ void ArucoMarker::listen_transform(mage_msgs::msg::AdvancedLogicalCameraImage da
   battery_pose_actual.position.z = t_stamped.transform.translation.z;
   battery_pose_actual.orientation = t_stamped.transform.rotation;
     
-
-    // Adding color to battery_poses map
     auto color_int = data.part_poses.at(0).part.color ;
-    // auto color_int_str = std::to_string(color_int);
     if(battery_poses.count(color_int) == 0){
-        // RCLCPP_ERROR(this->get_logger(), "Colors in battery are: %i,", color_int);
         battery_poses[color_int] = battery_pose_actual ;
     }
 
-    
-
-    // publish_data(target_frame, battery_pose_actual);
     
     
 }
@@ -228,59 +221,22 @@ void ArucoMarker::sort_and_publish(){
 
     geometry_msgs::msg::PoseArray pose_array;
 
-    // for (const auto &pair : battery_poses) {
-    //     RCLCPP_ERROR(this->get_logger(), "Colors int in battery are: %i,", pair.first);
-    //         // std::cout << pair.first << '\n';  
-    //     }
 
     for (int i = 0; i < list_of_colors.size(); i++)
     {
         auto col_int = list_of_colors[i];
         auto x_cordinate = battery_poses[col_int].position.x ;
-        RCLCPP_ERROR(this->get_logger(), "publishing Colors :%i , x is: %f,", col_int, x_cordinate);
 
 
         pose_array.poses.push_back(battery_poses[col_int]);
     }
     
-    for (const auto& pose : pose_array.poses) {
-    // Access and process each pose
-    // For example, access the position and orientation of the pose
-    double x_cord = pose.position.x;
-    double y = pose.position.y;
-    double z = pose.position.z;
-
-    double orientation_x = pose.orientation.x;
-    double orientation_y = pose.orientation.y;
-    double orientation_z = pose.orientation.z;
-    double orientation_w = pose.orientation.w;
-
-    RCLCPP_ERROR(this->get_logger(), "subs Colors  , x is: %f,", x_cord);
-}
     
     pose_array_publisher_->publish(pose_array);
    
-// publishs_data_timer_.reset();
  
 }
 
-
-
-void ArucoMarker::publish_data(const std::string &target_frame, geometry_msgs::msg::Pose battery_pose_actual){
-    if (target_frame =="part_1"){
-        batttery1_publisher_->publish(battery_pose_actual);
-    }else if (target_frame =="part_2"){
-        batttery2_publisher_->publish(battery_pose_actual);
-    }else if (target_frame =="part_3"){
-        batttery3_publisher_->publish(battery_pose_actual);
-    }else if (target_frame =="part_4"){
-        // RCLCPP_INFO(this->get_logger(),"publishing to 4" );
-        batttery4_publisher_->publish(battery_pose_actual);
-    }else if (target_frame =="part_5"){
-        // RCLCPP_INFO(this->get_logger(),"publishing to 5" );
-        batttery5_publisher_->publish(battery_pose_actual);
-    }
-}
 
 void ArucoMarker::broadcaster_timer()
 {

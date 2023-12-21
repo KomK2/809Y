@@ -8,11 +8,11 @@
 #include <geometry_msgs/msg/pose_array.hpp>
 
 namespace navigation {
-class NavigationDemo : public rclcpp::Node {
+class NavigationBloc : public rclcpp::Node {
  public:
   using FollowWaypoints = nav2_msgs::action::FollowWaypoints;
   using GoalHandleNavigation = rclcpp_action::ClientGoalHandle<FollowWaypoints>;
-  NavigationDemo(std::string node_name) : Node(node_name) {
+  NavigationBloc(std::string node_name) : Node(node_name) {
     // initialize the client
     client_ =
         rclcpp_action::create_client<FollowWaypoints>(this, "follow_waypoints");
@@ -23,15 +23,8 @@ class NavigationDemo : public rclcpp::Node {
 
     pose_array_subscriber_  = this->create_subscription<geometry_msgs::msg::PoseArray>(
             "pose_array_topic", 10,
-            std::bind(&NavigationDemo::poseArrayCallback, this, std::placeholders::_1));
+            std::bind(&NavigationBloc::poseArrayCallback, this, std::placeholders::_1));
 
-    // set the initial pose for navigation
- 
-
-    
-
-            // batttery1_subsrciber_ = this->create_subscription<geometry_msgs::msg::Pose>(
-            // "mage/camera5/image", rclcpp::SensorDataQoS(), std::bind(&NavigationDemo::logicalCameraCb5, this, std::placeholders::_1));
   }
 
  private:
@@ -81,5 +74,5 @@ geometry_msgs::msg::PoseArray pose_array_data ;
 
 rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr pose_array_subscriber_ ;
   
-};  // class NavigationDemo
+};  // class NavigationBloc
 }  // namespace navigation

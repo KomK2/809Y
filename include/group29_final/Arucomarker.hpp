@@ -57,11 +57,6 @@ public:
 
         publishs_data_timer_ = this->create_wall_timer(100ms, std::bind(&ArucoMarker::sort_and_publish, this));
 
-        batttery1_publisher_  = this->create_publisher<geometry_msgs::msg::Pose>("/battery_position_1", 10);
-        batttery2_publisher_  = this->create_publisher<geometry_msgs::msg::Pose>("/battery_position_2", 10);
-        batttery3_publisher_  = this->create_publisher<geometry_msgs::msg::Pose>("/battery_position_3", 10);
-        batttery4_publisher_  = this->create_publisher<geometry_msgs::msg::Pose>("/battery_position_4", 10);
-        batttery5_publisher_  = this->create_publisher<geometry_msgs::msg::Pose>("/battery_position_5", 10);
 
         pose_array_publisher_ = this->create_publisher<geometry_msgs::msg::PoseArray>("/pose_array_topic", 10);
 
@@ -103,13 +98,8 @@ private:
     rclcpp::TimerBase::SharedPtr broadcaster_timer_;
     rclcpp::TimerBase::SharedPtr publishs_data_timer_;
     void broadcaster_timer();
-    rclcpp::Publisher<geometry_msgs::msg::Pose >::SharedPtr batttery1_publisher_;
-    rclcpp::Publisher<geometry_msgs::msg::Pose >::SharedPtr batttery2_publisher_;
-    rclcpp::Publisher<geometry_msgs::msg::Pose >::SharedPtr batttery3_publisher_;
-    rclcpp::Publisher<geometry_msgs::msg::Pose >::SharedPtr batttery4_publisher_;
-    rclcpp::Publisher<geometry_msgs::msg::Pose >::SharedPtr batttery5_publisher_;
 
-    void publish_data(const std::string &target_frame, geometry_msgs::msg::Pose battery_pose_actual);
+
 
     std::vector<int> list_of_colors;
     std::unordered_map<int ,geometry_msgs::msg::Pose> battery_poses; 
